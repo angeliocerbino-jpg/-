@@ -1,0 +1,13 @@
+{
+  "name": "cfmoto-hungary-price-history",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.9"
+  }
+}

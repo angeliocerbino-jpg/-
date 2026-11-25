@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101820">
+<meta name="description" content="按品类和排量段浏览匈牙利两轮市场车型、图片与价格">
+<title>匈牙利竞品价格图鉴</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="catalog.js"></script>
+<script defer src="excel.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="wordmark" href="./" aria-label="回到匈牙利竞品价格图鉴首页"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span>CFMOTO <small>MARKET INTELLIGENCE</small></span></a>
+    <nav aria-label="页面功能">
+      <details id="tools-menu" class="tools-menu">
+        <summary id="tools-button"><span class="tools-icon" aria-hidden="true"></span>功能区</summary>
+        <div class="tools-panel">
+          <label for="price-period">价格时间</label>
+          <select id="price-period">
+            <option value="latest">最新可用报价</option>
+            <option value="baseline">月报基准报价</option>
+          </select>
+          <p id="period-help" class="muted" role="status">正在读取采集日期…</p>
+          <div class="tools-links">
+            <a href="#compare">价格对比</a>
+            <button id="removed-button" type="button">已移除（0）</button>
+            <a href="#sources">数据口径</a>
+          </div>
+          <div class="tools-export" role="group" aria-label="导出 Excel">
+            <span>导出 Excel</span>
+            <button type="button" id="export-filtered">当前筛选</button>
+            <button type="button" id="export-all">全部车型</button>
+          </div>
+        </div>
+      </details>
+    </nav>
+    <a class="section-link" href="promotions/index.html">促销动态</a>
+    <div class="market"><span class="flag" aria-hidden="true"></span> <span>匈牙利市场</span></div>
+  </div>
+</header>
+<main>
+  <section class="hero" aria-labelledby="main-heading">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> HUNGARY / TWO-WHEEL MARKET</p>
+        <h1 id="main-heading">竞品价格图鉴</h1>
+        <p class="lead">查看匈牙利车型报价，测算春风目标价。</p>
+        <a class="hero-button" href="#compare">开始比价</a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <span class="hero-type">450<span>MT</span></span>
+        <img src="assets/hero.webp" alt="" fetchpriority="high" onerror="this.hidden=true">
+        <span class="hero-caption">CFMOTO 450MT</span>
+      </div>
+    </div>
+  </section>
+  <section id="compare" class="wrap compare" aria-labelledby="compare-heading">
+    <h2 id="compare-heading">价格对比</h2>
+    <div class="compare-settings">
+      <label>币种<select id="compare-currency"><option>HUF</option><option>EUR</option><option>USD</option></select></label>
+    </div>
+    <datalist id="compare-dates"></datalist>
+    <div class="compare-grid">
+      <label class="compare-cfmoto">春风车型<select id="compare-cfmoto"></select></label>
+      <label class="compare-rival">竞品车型<select id="compare-rival"></select></label>
+      <label class="compare-original">基准日期<input id="compare-original-date" type="date" list="compare-dates"></label>
+      <div class="compare-price">
+        <input id="compare-original-cfmoto" type="number" min="0" step="any" inputmode="decimal" aria-label="春风历史价" placeholder="输入历史价">
+        <small id="compare-original-cfmoto-converted" class="compare-converted" hidden></small>
+      </div>
+      <div class="compare-price">
+        <input id="compare-original-rival" type="number" min="0" step="any" inputmode="decimal" aria-label="竞品历史价" placeholder="输入历史价">
+        <small id="compare-original-rival-converted" class="compare-converted" hidden></small>
+      </div>
+      <p id="compare-summary" class="compare-result" role="status">请选择车型或填写两个历史价格。</p>
+      <label class="compare-current">目标日期<select id="compare-current-date"></select></label>
+      <div class="compare-price">
+        <output id="compare-target" aria-label="春风目标价">—</output>
+        <small id="compare-target-converted" class="compare-converted" hidden></small>
+      </div>
+      <div class="compare-price">
+        <output id="compare-current-rival" aria-label="目标日期的竞品价">—</output>
+        <small id="compare-current-rival-converted" class="compare-converted" hidden></small>
+      </div>
+      <p id="compare-current-gap" class="compare-result" role="status"></p>
+    </div>
+    <p class="compare-fx muted">参考汇率（2026 年 11 月 18 日） · 1 USD ≈ 335.886 HUF · 1 EUR ≈ 368.39 HUF</p>
+  </section>
+  <section id="catalog" class="wrap catalog" aria-labelledby="catalog-heading">
+    <div class="catalog-head">
+      <div><h2 id="catalog-heading">车型报价</h2><p class="muted">春风车型优先 · 当地价 HUF · USD / EUR 参考折算</p></div>
+      <details class="price-info"><summary>价格更新时间</summary><div><p id="price-status" aria-live="polite">报价每 15 天采集一次。可在左上角切换整页报价日期。</p><p class="fx-note">美元及欧元按月报 2026 年 11 月 18 日的换算口径估算。</p></div></details>
+    </div>
+    <div class="controls">
+      <div class="filter-line">
+        <div class="categories" id="categories" role="group" aria-label="车型品类"></div>
+        <label class="search"><span class="search-icon" aria-hidden="true"></span><input id="query" type="search" placeholder="搜索品牌或车型" aria-label="搜索品牌或车型"></label>
+      </div>
+      <div class="filter-line bands-line">
+        <div class="bands" id="bands" role="group" aria-label="排量段"></div>
+        <div class="utilities">
+          <label class="toggle"><input type="checkbox" id="priced"><span>仅看有报价</span></label>
+          <label class="sort"><span class="sr-only">排序</span><select id="sort"><option value="model">按车型排序</option><option value="asc">价格由低到高</option><option value="desc">价格由高到低</option></select></label>
+        </div>
+      </div>
+    </div>
+    <div class="catalog-actions">
+      <p id="results" aria-live="polite"></p>
+      <p id="active-period" aria-live="polite"></p>
+    </div>
+    <div id="excel-download-panel" class="catalog-actions" hidden>
+      <p id="excel-export-message" class="muted" role="status"></p>
+      <a id="excel-download" class="action-button" hidden>手动下载 Excel</a>
+    </div>
+    <p id="action-status" class="sr-only" role="status"></p>
+    <div id="groups" class="group-list"></div>
+    <dialog id="removed-dialog" aria-labelledby="removed-title">
+      <div class="dialog-head">
+        <h3 id="removed-title">已移除车型</h3>
+        <form method="dialog"><button type="submit" class="action-button">关闭</button></form>
+      </div>
+      <p class="muted">移除记录保存在当前浏览器。</p>
+      <ul id="removed-list"></ul>
+      <button type="button" class="action-button" id="restore-all">恢复全部</button>
+    </dialog>
+    <noscript>请启用 JavaScript 以浏览车型。</noscript>
+    <dialog id="history-dialog" aria-labelledby="history-title">
+      <div class="dialog-head">
+        <h3 id="history-title">价格历史</h3>
+        <form method="dialog"><button type="submit" class="action-button">关闭</button></form>
+      </div>
+      <p id="history-note" class="muted"></p>
+      <p id="history-empty" class="muted" hidden>暂无报价记录。</p>
+      <div id="history-table" class="history-table" hidden>
+        <table aria-label="按日期列出的价格记录">
+          <thead><tr><th scope="col">报价日期</th><th scope="col" class="history-price">当地价（HUF）</th><th scope="col" class="history-price">约合欧元（EUR）</th><th scope="col" class="history-price">约合美元（USD）</th><th scope="col">来源</th></tr></thead>
+          <tbody id="history-entries"></tbody>
+        </table>
+        <p id="history-fx-note" class="muted"></p>
+      </div>
+    </dialog>
+  </section>
+</main>
+<footer id="sources">
+  <div class="wrap footer-inner">
+    <div><strong>匈牙利竞品价格图鉴</strong><p>基准报价取自《匈牙利月度分析｜2026年1—10月》及车型卡片标注的匈牙利官网。排量分组沿用月报 CC-Class，车型图片用于识别车型，图片所示年款、颜色与当地报价版本可能不同。价差百分比 =（竞品价 − 春风价）÷ 竞品价。</p></div>
+    <a href="#catalog">返回车型报价</a>
+  </div>
+</footer>
+</body>
+</html>

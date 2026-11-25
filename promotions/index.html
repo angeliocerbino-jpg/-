@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>匈牙利摩托车促销看板</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="data.js"></script>
+<script defer src="scan-data.js"></script>
+<script defer src="excel.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap top-inner">
+  <a class="wordmark" href="#top"><span class="mark" aria-hidden="true">HU</span> 匈牙利摩托车市场</a>
+  <a class="nav-link section-link" href="../index.html">车型报价</a>
+  <a class="nav-link" href="#brands">品牌入口</a><a class="nav-link" href="#offers">活动明细</a>
+</div></header>
+<main id="top">
+  <section class="hero wrap" aria-labelledby="title">
+    <div class="hero-copy">
+      <p class="eyebrow">HUNGARY / MOTORCYCLE OFFERS</p>
+      <h1 id="title">匈牙利<br>竞品促销动态</h1>
+      <p class="hero-sub">看五个品牌近期怎么降价、送配件和做分期。</p>
+      <a class="button primary" href="#offers">浏览活动 <span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="hero-art"><img src="assets/m064.webp" alt="Suzuki V-Strom 800 车型参考图"><figcaption>SUZUKI / V-STROM 800 · 车型参考图</figcaption></figure>
+  </section>
+  <section id="brands" class="wrap brands" aria-labelledby="brands-title">
+    <div class="section-head"><h2 id="brands-title">品牌促销入口</h2><p>打开各品牌的匈牙利促销入口</p></div>
+    <div id="brand-links" class="brand-grid"></div>
+  </section>
+  <section id="offers" class="wrap offers" aria-labelledby="offers-title">
+    <div class="section-head">
+      <div><h2 id="offers-title">活动明细</h2><p id="checked-date"></p></div>
+      <button class="button primary" id="export" type="button">导出 Excel <span aria-hidden="true">↓</span></button>
+    </div>
+    <details class="scan-details" id="scan-details"><summary>本轮来源扫描结果</summary><ul id="scan-results"></ul></details>
+    <div class="filters">
+      <label>品牌<select id="brand"><option value="">全部品牌</option></select></label>
+      <label>活动类型<select id="type"><option value="">全部类型</option></select></label>
+      <label>活动状态<select id="status"><option value="">全部状态</option><option value="current">近期及待确认</option><option value="expired">仅已结束</option></select></label>
+      <label class="search">搜索<input type="search" id="query" placeholder="输入品牌、车型或活动"></label>
+    </div>
+    <div class="list-meta"><p id="count" role="status"></p><p id="download-status" role="status"></p><a id="download" hidden>手动下载 Excel</a></div>
+    <details class="scan-details removed-details" id="removed-details" hidden>
+      <summary id="removed-count">已移除活动</summary>
+      <ul id="removed-list"></ul>
+    </details>
+    <div id="results" class="offer-grid"></div>
+    <noscript>请启用 JavaScript 查看活动和导出 Excel。</noscript>
+  </section>
+</main>
+<footer><div class="wrap">活动条件和库存以原文及经销商答复为准。EUR、USD 按竞品图鉴 2026-11-18 参考汇率折算。</div></footer>
+</body>
+</html>
