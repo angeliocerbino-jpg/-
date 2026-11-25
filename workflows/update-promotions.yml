@@ -1,0 +1,30 @@
+name: Update Hungarian promotions
+on:
+  schedule:
+    - cron: '17 8 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: promotion-scan
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DEEPL_AUTH_KEY: ${{ secrets.DEEPL_AUTH_KEY }}
+      FORCE_PROMO_SCAN: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install lxml==6.1.1
+      - run: python scripts/scan_promotions.py
+      - name: Publish changed snapshot
+        run: |
+          git add promotions/scan-data.js
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='promotion-scan[bot]' -c user.email='promotion-scan[bot]@users.noreply.github.com' commit -m 'Refresh Hungarian promotions'
+          git push
