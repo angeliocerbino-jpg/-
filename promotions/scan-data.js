@@ -10,10 +10,8 @@ const promotionScan = {
     },
     {
       "brand": "Kawasaki",
-      "pages": 24,
-      "failed": [
-        "https://www.bajnokmotor.hu/kawasaki/aktualis_ajanlataink/kawasaki-versys900se.html"
-      ],
+      "pages": 25,
+      "failed": [],
       "offers": 11
     },
     {
